@@ -5,7 +5,13 @@ from pathlib import Path
 import time
 
 name = input("What do you want the name of the bots to be? >")
-token = input("What is your token? >")
+file = Path("default_token.txt")
+if file.is_file():
+    print("Default token found, using that...")
+    f = open("default_token.txt", "r")
+    token = f.read()
+else:
+    token = input("What is your token? (to skip this dialog in the future make a file called default_token.txt) >")
 a = input("How many bots do you want to make? >")
 created = 0
 
@@ -27,7 +33,6 @@ while created < int(a):
         bot_token = r.json().get('token', None)
         print(f'{name}{created}s token is {bot_token}')
         req = requests.patch(f'https://discord.com/api/v9/applications/{bot_id}', headers=headers, json={"bot_public":"true","bot_require_code_grant":"false","flags":565248})
-        file = Path("savedtokens.txt")
         if file.is_file():
             f = open("savedtokens.txt", "a")
             f.write(f'{name}{created}:{bot_token}:https://discord.com/api/oauth2/authorize?client_id={bot_id}&permissions=8&scope=bot' + '\n')
