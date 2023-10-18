@@ -18,7 +18,7 @@ headers = {
 while created < int(a):
     response = requests.post('https://discord.com/api/v9/applications', headers=headers, json={"name": f'{name}{created}'})
     if response.status_code == 201:
-        print("Bot created!")
+        print("created application")
         bot_data = response.json()
         bot_id = bot_data.get('id', None)
         print(bot_id)
@@ -26,6 +26,7 @@ while created < int(a):
         print("Bot created!")
         bot_token = r.json().get('token', None)
         print(f'{name}{created}s token is {bot_token}')
+        req = requests.patch(f'https://discord.com/api/v9/applications/{bot_id}', headers=headers, json={"bot_public":"true","bot_require_code_grant":"false","flags":565248})
         file = Path("savedtokens.txt")
         if file.is_file():
             f = open("savedtokens.txt", "a")
