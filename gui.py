@@ -33,9 +33,9 @@ def create_bot():
                 f = open("savedtokens.txt", "x")
                 f.write(f'{name}{created}:{bot_token}:https://discord.com/api/oauth2/authorize?client_id={bot_id}&permissions=8&scope=bot' + '\n')   
         elif response.status_code == 401:
-            print("Error: 401 Unauthorized, are you sure your token is correct?")
+            rlabel.config(text="Error: 401 Unauthorized, are you sure your token is correct?")
         elif response.status_code == 429:
-            print("Error: 429 Too Many Requests, waiting 30 seconds...")
+            rlabel.config(text="Error: 429 Too Many Requests, waiting 30 seconds...")
             time.sleep(30)
         else:
             print("Error: " + str(response.status_code))
@@ -43,6 +43,7 @@ def create_bot():
         time.sleep(5)
     else:
         print("Done!")
+     
 
 
 window = tk.Tk()
@@ -58,7 +59,7 @@ file = Path("default_token.txt")
 if file.is_file():
     ttext = tk.Entry(window, width=50)
     t = open("default_token.txt", "r")
-    ttext.insert(0, t.read())
+    ttext.insert(0, "Default token found, using that")
     tlabel = tk.Label(window, text="Token:")
     ttext.config(state="readonly")
     ttext.place(x=100, y=150)
