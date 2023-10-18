@@ -38,7 +38,7 @@ def create_bot():
             rlabel.config(text="Error: 429 Too Many Requests, waiting 30 seconds...")
             time.sleep(30)
         else:
-            print("Error: " + str(response.status_code))
+            rlabel.config(text="Error: " + str(response.status_code))
         created += 1
         time.sleep(5)
     else:
