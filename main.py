@@ -11,7 +11,7 @@ if file.is_file():
     f = open("default_token.txt", "r")
     token = f.read()
 else:
-    token = input("What is your token? (to skip this dialog in the future make a file called default_token.txt) >")
+    token = input("What is your token? (to skip this dialog in the future make a file called default_token.txt and put a token in it) >")
 a = input("How many bots do you want to make? >")
 created = 0
 
